@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Requirement Engineering MCQ Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero-panel">
+        <p class="eyebrow">Requirement Engineering</p>
+        <h1>MCQ Quiz</h1>
+        <p class="hero-copy">
+          Choose how you want to play. You can answer everything first and see the final
+          score at the end, or reveal the correct answer after each submission.
+        </p>
+        <div class="hero-stats">
+          <div>
+            <span id="questionCount">54</span>
+            <small>Questions</small>
+          </div>
+          <div>
+            <span>1</span>
+            <small>Question at a time</small>
+          </div>
+          <div>
+            <span>Final</span>
+            <small>Score shown at end</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="quiz-panel" aria-live="polite">
+        <article class="card mode-card" id="modeCard">
+          <p class="eyebrow">Choose mode</p>
+          <h2>Select how the quiz should behave</h2>
+          <div class="mode-grid">
+            <button type="button" class="mode-btn" id="modeScoreLater">
+              <span>Answer all</span>
+              <small>Submit each question and see the final score at the end.</small>
+            </button>
+            <button type="button" class="mode-btn" id="modeRevealEach">
+              <span>Reveal each answer</span>
+              <small>See the correct answer after every submit and continue one by one.</small>
+            </button>
+          </div>
+        </article>
+
+        <div class="quiz-topbar" id="quizTopbar">
+          <div>
+            <p class="progress-label" id="progressLabel">Question 1 of 54</p>
+            <div class="progress-track" aria-hidden="true">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+          </div>
+          <span class="pill" id="sourceNumber">Q1</span>
+        </div>
+
+        <article class="card" id="quizCard">
+          <div class="card-header">
+            <p class="question-index" id="questionIndex">1</p>
+            <h2 id="questionText">Loading question…</h2>
+          </div>
+
+          <form id="quizForm" class="options-list"></form>
+
+          <div class="feedback-box" id="feedbackBox" hidden>
+            <p class="feedback-label" id="feedbackLabel"></p>
+            <p class="feedback-answer" id="feedbackAnswer"></p>
+          </div>
+
+          <p class="error-message" id="errorMessage" role="alert" hidden>
+            Select an option before continuing.
+          </p>
+
+          <div class="actions">
+            <button type="submit" form="quizForm" class="primary-btn" id="submitButton">
+              Submit answer
+            </button>
+          </div>
+        </article>
+
+        <article class="card result-card" id="resultCard" hidden>
+          <p class="eyebrow">Quiz complete</p>
+          <h2 id="resultTitle">Your score is ready</h2>
+          <p id="resultSummary"></p>
+          <button type="button" class="primary-btn" id="restartButton">Restart quiz</button>
+        </article>
+      </section>
+    </main>
+
+    <script src="questions.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
