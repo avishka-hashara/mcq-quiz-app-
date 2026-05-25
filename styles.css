@@ -57,6 +57,19 @@ body::before {
   align-items: center;
 }
 
+.app-shell.quiz-active {
+  grid-template-columns: 1fr;
+  width: min(780px, calc(100% - 32px));
+}
+
+.app-shell.quiz-active .hero-panel {
+  display: none;
+}
+
+.app-shell.quiz-active .quiz-panel {
+  width: 100%;
+}
+
 .hero-panel,
 .quiz-panel {
   position: relative;
@@ -134,6 +147,25 @@ body::before {
   justify-content: space-between;
   align-items: flex-start;
   gap: 16px;
+}
+
+.quiz-toolbar {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 30;
+  display: flex;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+
+.quiz-toolbar .secondary-btn {
+  pointer-events: auto;
+  box-shadow: 0 16px 40px rgba(2, 6, 23, 0.3);
+}
+
+.restart-icon {
+  display: none;
 }
 
 .progress-label {
@@ -308,7 +340,28 @@ body::before {
 .actions {
   margin-top: 22px;
   display: flex;
+  gap: 12px;
   justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.secondary-btn {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 14px 20px;
+  border-radius: 16px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 140ms ease, border-color 140ms ease, background 140ms ease, opacity 140ms ease;
+}
+
+.secondary-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(245, 158, 11, 0.42);
+  background: rgba(255, 255, 255, 0.09);
 }
 
 .primary-btn {
@@ -383,8 +436,43 @@ body::before {
     flex-direction: column;
   }
 
+  .quiz-toolbar {
+    right: 16px;
+    bottom: 16px;
+    justify-content: flex-end;
+  }
+
   .progress-track {
     width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .quiz-toolbar {
+    top: 84px;
+    right: 12px;
+    bottom: auto;
+  }
+
+  .quiz-toolbar .secondary-btn {
+    width: auto !important;
+    min-width: 0;
+    padding: 0;
+    border-radius: 999px;
+  }
+
+  .restart-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  .restart-text {
+    display: none;
   }
 }
 
@@ -515,9 +603,15 @@ body::before {
     margin-top: 18px;
   }
 
+  .secondary-btn,
   .primary-btn {
     width: 100%;
     padding: 13px 16px;
+  }
+
+  .quiz-toolbar .secondary-btn {
+    width: auto;
+    padding: 0;
   }
 
   .hero-stats {
@@ -533,6 +627,17 @@ body::before {
   .app-shell {
     width: min(100%, calc(100% - 12px));
     padding: 12px 0 16px;
+  }
+
+  .quiz-toolbar {
+    top: 76px;
+    right: 10px;
+    bottom: auto;
+  }
+
+  .quiz-toolbar .secondary-btn {
+    width: auto !important;
+    padding: 0;
   }
 
   .hero-panel,

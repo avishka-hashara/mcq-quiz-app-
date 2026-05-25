@@ -1,9 +1,12 @@
 const questions = window.quizQuestions ?? [];
 
+const appShell = document.querySelector('.app-shell');
+const heroPanel = document.querySelector('.hero-panel');
 const quizCard = document.getElementById('quizCard');
 const modeCard = document.getElementById('modeCard');
 const resultCard = document.getElementById('resultCard');
 const quizTopbar = document.getElementById('quizTopbar');
+const quizToolbar = document.getElementById('quizToolbar');
 const quizForm = document.getElementById('quizForm');
 const questionCount = document.getElementById('questionCount');
 const progressLabel = document.getElementById('progressLabel');
@@ -18,6 +21,7 @@ const feedbackAnswer = document.getElementById('feedbackAnswer');
 const resultTitle = document.getElementById('resultTitle');
 const resultSummary = document.getElementById('resultSummary');
 const restartButton = document.getElementById('restartButton');
+const quizRestartButton = document.getElementById('quizRestartButton');
 const submitButton = document.getElementById('submitButton');
 const modeScoreLaterButton = document.getElementById('modeScoreLater');
 const modeRevealEachButton = document.getElementById('modeRevealEach');
@@ -46,10 +50,25 @@ function resetQuizState() {
 }
 
 function showQuizShell() {
+  heroPanel.hidden = true;
+  appShell.classList.add('quiz-active');
   modeCard.hidden = true;
   quizTopbar.hidden = false;
+  quizToolbar.hidden = false;
   quizCard.hidden = false;
   resultCard.hidden = true;
+}
+
+function returnToHome() {
+  selectedMode = null;
+  resetQuizState();
+  resultCard.hidden = true;
+  quizCard.hidden = true;
+  quizTopbar.hidden = true;
+  quizToolbar.hidden = true;
+  heroPanel.hidden = false;
+  appShell.classList.remove('quiz-active');
+  modeCard.hidden = false;
 }
 
 function renderQuestion() {
@@ -166,12 +185,11 @@ quizForm.addEventListener('submit', (event) => {
 });
 
 restartButton.addEventListener('click', () => {
-  selectedMode = null;
-  resetQuizState();
-  resultCard.hidden = true;
-  quizCard.hidden = true;
-  quizTopbar.hidden = true;
-  modeCard.hidden = false;
+  returnToHome();
+});
+
+quizRestartButton.addEventListener('click', () => {
+  returnToHome();
 });
 
 modeScoreLaterButton.addEventListener('click', () => {
@@ -192,3 +210,5 @@ modeCard.hidden = false;
 quizCard.hidden = true;
 resultCard.hidden = true;
 quizTopbar.hidden = true;
+quizToolbar.hidden = true;
+heroPanel.hidden = false;
