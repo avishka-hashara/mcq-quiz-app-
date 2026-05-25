@@ -45,6 +45,7 @@ function resetQuizState() {
   awaitingNextQuestion = false;
   errorMessage.hidden = true;
   feedbackBox.hidden = true;
+  feedbackBox.classList.remove('is-correct', 'is-wrong');
   feedbackLabel.textContent = '';
   feedbackAnswer.textContent = '';
 }
@@ -81,6 +82,7 @@ function renderQuestion() {
 
   errorMessage.hidden = true;
   feedbackBox.hidden = true;
+  feedbackBox.classList.remove('is-correct', 'is-wrong');
   questionIndex.textContent = String(currentQuestionIndex + 1);
   questionText.textContent = question.question;
   sourceNumber.textContent = `Q${question.number}`;
@@ -107,7 +109,10 @@ function renderQuestion() {
             id="q${currentQuestionIndex}-option${optionIndex}"
             value="${optionIndex}"
           />
-          <label for="q${currentQuestionIndex}-option${optionIndex}">${option}</label>
+          <label for="q${currentQuestionIndex}-option${optionIndex}">
+            <span class="option-number">${optionIndex + 1}.</span>
+            <span class="option-text">${option}</span>
+          </label>
         </div>
       `
     )
@@ -162,10 +167,12 @@ quizForm.addEventListener('submit', (event) => {
     const chosenIndex = Number(selected.value);
     const isCorrect = chosenIndex === question.correctIndex;
     feedbackBox.hidden = false;
-    feedbackLabel.textContent = isCorrect ? 'Correct' : 'Correct answer';
+    feedbackBox.classList.toggle('is-correct', isCorrect);
+    feedbackBox.classList.toggle('is-wrong', !isCorrect);
+    feedbackLabel.textContent = isCorrect ? 'Correct' : 'Wrong answer';
     feedbackAnswer.textContent = isCorrect
       ? `You selected the correct answer: ${getCorrectAnswerText(question)}`
-      : `Correct answer: ${getCorrectAnswerText(question)}.`;
+      : `Your answer is wrong. Correct answer: ${getCorrectAnswerText(question)}.`;
     awaitingNextQuestion = true;
     quizForm.querySelectorAll('input').forEach((input) => {
       input.disabled = true;
